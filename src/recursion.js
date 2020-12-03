@@ -90,22 +90,27 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  // base case for if range goes from a smaller x to a larger y
   if (x === y - 1) {
     return [];
   }
 
+  // base case if x and y are equal
   if (x === y) {
     return [];
   }
 
+  // base case if range goes from a larger x to a smaller y
   if (x === y + 1) {
     return [];
   }
 
+  // recursive case: if range goes from larger x to smaller y
   if (x > y) {
     return [x - 1].concat(range(x - 1, y));
   }
 
+  // recursive case: if range goes from smaller x to larger y
   return [x + 1].concat(range(x + 1, y));
 };
 
