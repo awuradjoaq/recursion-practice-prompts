@@ -325,6 +325,11 @@ var createArray = function(str) {
 
 // 17. Reverse the order of an array
 var reverseArr = function(array) {
+  if (array.length === 0) {
+    return [];
+  }
+
+  return reverseArr(array.slice(1)).concat([array[0]]);
 };
 
 // 18. Create a new array with a given value and length.
@@ -566,6 +571,40 @@ var binarySearch = function(array, target, min, max) {
 // mergeSort([34,7,23,32,5,62]) // [5,7,23,32,34,62]
 // https://www.khanacademy.org/computing/computer-science/algorithms/merge-sort/a/divide-and-conquer-algorithms
 var mergeSort = function(array) {
+  var merge = (array1, array2) => {
+    let merged = [];
+    var i = 0;
+    var j = 0;
+
+    while (i < array1.length && j < array2.length) {
+      if (array1[i] <= array2[j]) {
+        merged.push(array[i]);
+        i++;
+      } else {
+        merged.push(array[j]);
+        j++;
+      }
+    }
+    while(i < array1.length) {
+      merged.push(array1[i]);
+      i++;
+    }
+    while(j < array2.length) {
+      merged.push(array2[j]);
+      j++;
+    }
+    return merged;
+  }
+
+  if (array.length <= 1) {
+    return array;
+  }
+
+  let middle = Math.floor(array.length / 2);
+  let left = mergeSort(array.slice(0, middle));
+  let right = mergeSort(array.slice(middle));
+
+  return merge(left,right);
 };
 
 // 40. Deeply clone objects and arrays.
